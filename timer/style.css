@@ -1,0 +1,17 @@
+body {
+    overflow-x: hidden;
+    height: 100%;
+}
+canvas {
+    width: 100%;
+    height: 100%;
+    /*canvas不是块级元素？*/
+    display: block;
+    /*height: 200px;*/
+    border: 2px solid #eee;
+}
+
+.control {
+    text-align: center;
+    margin-top: 10px;
+}
