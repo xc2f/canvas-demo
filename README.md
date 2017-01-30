@@ -1,8 +1,7 @@
-## Welcome to GitHub Pages
+## [Welcome to GitHub Pages](https://dachow.github.io/canvas-demo/)
 
 ### DEMO
+
   \- [timer](https://Dachow.github.io/canvas-demo/timer/)
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    
+      参考自慕课网liuyubobobo老师的[课程](http://www.imooc.com/learn/133)。与教学demo不同在于改造为计时程序，并可打印分段计时时间。
