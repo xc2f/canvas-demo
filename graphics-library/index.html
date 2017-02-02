@@ -2,25 +2,73 @@
 <html>
 <head>
     <title>graphics library</title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet" />
 </head>
 <body>
     <div class="main container">
         <div class="row">
-            <div class="star col-xs-12 col-md-3">
+            <h2>正五角形</h2>
+            <div class="star col-xs-12 col-md-6">
                 <canvas>正五角形</canvas>
-                <div class="fun">drawStar(ctx, R, r, x, y [, rot, lw, s_color, f_color])</div>
+                <div class="fun"><code>drawStar(ctx, r, x, y [, rot, f_color])</code></div>
+            </div>
+            <div class="star-control col-xs-12 col-md-6">
+                <form name="star" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="star-r" class="col-xs-2 col-md-4 control-label">大小</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="text" class="form-control" id="star-r" name="star-r" placeholder="输入五角形长角到圆心长度" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="star-rot" class="col-xs-2 col-md-4 control-label">旋转</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="text" class="form-control" id="star-rot" name="star-rot" placeholder="输入旋转参数" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="star-f-color" class="col-xs-3 col-md-4 control-label">填充颜色</label>
+                        <div class="col-xs-9 col-md-8">
+                            <input type="color" id="star-f-color" name="star-f-color" placeholder="输入填充色，16进制、rgb、rgba" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-2 col-md-offset-4 col-md-4">
+                            <a type="button" class="btn btn-success" id="star-control">Control</a>
+                        </div>
+                        <div class="col-xs-5 col-md-4 text-center">
+                            <a type="button" class="btn btn-warning" id="star-reset">Reset</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
+        //add line below h1
+        var hr = document.createElement('hr');
+        var h2 = document.getElementsByTagName('h2');
+        for (var i = 0; i < h2.length; i++) {
+            insertAfter(hr, h2[i]);
+        }
+        function insertAfter(newEl, targetEl) {
+            var parentEl = targetEl.parentNode;
+
+            if (parentEl.lastChild == targetEl) {
+                parentEl.appendChild(newEl);
+            } else {
+                parentEl.insertBefore(newEl, targetEl.nextSibling);
+            }
+        }
+
         function target(className) {
             const elem = document.getElementsByClassName(className)[0];
-            const WIDTH = elem.clientWidth;
+            //col左右边距默认为30
+            const WIDTH = elem.clientWidth - 30;
             const HEIGHT = elem.clientHeight;
 
             var canvas = elem.getElementsByTagName('canvas')[0];

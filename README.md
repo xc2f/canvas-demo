@@ -1,6 +1,6 @@
-## [Welcome to GitHub Pages](https://dachow.github.io/canvas-demo/)
+## CANVAS DEMO
 
-### DEMO
+Visit on [GitHub Pages](https://dachow.github.io/canvas-demo/)
 
 - [图形库](https://Dachow.github.io/canvas-demo/graphics-library)
 
