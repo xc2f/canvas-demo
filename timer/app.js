@@ -1,4 +1,4 @@
-const WINDOW_WIDTH = self.innerWidth;
+const WINDOW_WIDTH = document.body.clientWidth;
 const WINDOW_HEIGHT = 500;
 const RADIUS = 7;
 
@@ -16,10 +16,49 @@ canvas.height = WINDOW_HEIGHT;
 var balls = [];
 const colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"];
 
+function drawArrow() {
+    context.moveTo(WINDOW_WIDTH / 2 - 10, 300);
+    context.lineTo(WINDOW_WIDTH / 2 - 10, 450);
+    context.lineTo(WINDOW_WIDTH / 2 - 25, 450);
+    context.lineTo(WINDOW_WIDTH / 2, 470);
+    context.lineTo(WINDOW_WIDTH / 2 + 25, 450);
+    context.lineTo(WINDOW_WIDTH / 2 + 10, 450);
+    context.lineTo(WINDOW_WIDTH / 2 + 10, 300);
+    context.closePath();
+
+    /* 指定渐变区域 */
+    var grad = context.createLinearGradient(WINDOW_WIDTH / 2 - 100, 300, WINDOW_WIDTH / 2, 470);
+    /* 指定几个颜色 */
+    grad.addColorStop(0, 'rgb(255, 255, 255)');
+    grad.addColorStop(1, 'rgb(0, 122, 204)');
+    /* 将这个渐变设置为fillStyle */
+    context.fillStyle = grad;
+    //contetx.fillStyle = 'RGB(0,122,204)'
+    context.fill();
+
+    context.strokeStyle = 'transparent';
+    context.stroke();
+}
+
+function drawTopic(ctx) {
+    ctx.font = "30px 微软雅黑";
+    // Create gradient
+    var gradient = ctx.createLinearGradient(0, 0, 200, 0);
+    gradient.addColorStop("0", "magenta");
+    gradient.addColorStop("0.5", "blue");
+    gradient.addColorStop("1.0", "red");
+    // Fill with gradient
+    ctx.fillStyle = gradient;
+    ctx.fillText("Timer-计时器", 70, 100);
+}
+
+//绘制程序说明和箭头
+drawArrow();
+drawTopic(context);
 
 document.getElementById('start').addEventListener('click', function () {
     // 清除右边打印的计时数字
-    context.clearRect(MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    //context.clearRect(MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     var time = {
         hours: 0,
@@ -39,6 +78,7 @@ document.getElementById('start').addEventListener('click', function () {
                 cp_time[i] = time[i];
             }
         }
+        renderMilliSeconds(context);
         render(context, time);
         update(time, cp_time);
     }, 50);
@@ -60,35 +100,50 @@ document.getElementById('start').addEventListener('click', function () {
 
 
     // 打印计时按钮触发的时间快照
-    var font_lh = 0,
-        col = 0;
-    document.getElementById('prt').addEventListener('click', function () {
-        if (col === 0) {
-            if (font_lh <= WINDOW_HEIGHT) {
-                context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, font_lh += 20);
-            } else {
-                col = 1;
-                font_lh = 0;
-            }
-        } else if (col === 1) {
-            if (font_lh <= WINDOW_HEIGHT) {
-                context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 3, font_lh += 20);
-            } else {
-                col = 2;
-                font_lh = 0;
-            }
-        } else if (col === 2) {
-            if (font_lh <= WINDOW_HEIGHT) {
-                context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 4, font_lh += 20);
-            } else {
-                col = 3;
-                font_lh = 0;
-            }
-        } else if (col === 3) {
-            if (font_lh <= WINDOW_HEIGHT) {
-                context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 5, font_lh += 20);
-            }
+
+    //(canvas绘制到时钟右侧)
+    //var font_lh = 0,
+    //    col = 0;
+    //document.getElementById('prt').addEventListener('click', function () {
+    //    if (col === 0) {
+    //        if (font_lh <= WINDOW_HEIGHT) {
+    //            context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, font_lh += 20);
+    //        } else {
+    //            col = 1;
+    //            font_lh = 0;
+    //        }
+    //    } else if (col === 1) {
+    //        if (font_lh <= WINDOW_HEIGHT) {
+    //            context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 3, font_lh += 20);
+    //        } else {
+    //            col = 2;
+    //            font_lh = 0;
+    //        }
+    //    } else if (col === 2) {
+    //        if (font_lh <= WINDOW_HEIGHT) {
+    //            context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 4, font_lh += 20);
+    //        } else {
+    //            col = 3;
+    //            font_lh = 0;
+    //        }
+    //    } else if (col === 3) {
+    //        if (font_lh <= WINDOW_HEIGHT) {
+    //            context.fillText(time.hours + ':' + time.minutes + ':' + time.seconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 5, font_lh += 20);
+    //        }
+    //    }
+    //}, false);
+
+    // js写入到屏幕下方
+    var ul_wrap = document.getElementsByClassName('time-prt')[0];
+    document.getElementById('prt').addEventListener('click', function myfunction() {
+        var li = document.createElement('li');
+        //防止出现毫秒数为1000的情况, 所以，如果出现x:x:x:0的情况，为if；如果是x:x:x只有三位，为else
+        if (mSeconds !== 1000) {
+            li.appendChild(document.createTextNode(time.hours + ':' + time.minutes + ':' + time.seconds + ':' + mSeconds));
+        } else {
+            li.appendChild(document.createTextNode(time.hours + ':' + time.minutes + ':' + time.seconds));
         }
+        ul_wrap.appendChild(li);
     }, false);
 
     document.getElementById('stop').addEventListener('click', function () {
@@ -104,10 +159,33 @@ document.getElementById('start').addEventListener('click', function () {
             seconds: 0,
             counts: 0
         });
+        //恢复毫秒
+        context.clearRect(MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        context.fillText(0, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, 200);
+        mSeconds = 0;
+
+        //下方计时区域添加间隔
+        var li_pause = document.createElement('li');
+        li_pause.setAttribute('class', 'pause');
+        li_pause.appendChild(document.createTextNode('pause'));
+        ul_wrap.appendChild(li_pause);
     });
 
-
+    // 开始按钮结束
 }, false);
+
+//模仿毫秒
+var mSeconds = 0;
+function renderMilliSeconds(ctx) {
+    if (mSeconds < 1000) {
+        ctx.clearRect(MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        ctx.fillText(mSeconds, MARGIN_LEFT + ((2 * RADIUS) * 7 + SEPARTE) * 6 + ((2 * RADIUS) * 4 + SEPARTE) * 2, 200);
+        // 循环任务50毫秒执行一次
+        mSeconds += 50;
+    } else {
+        mSeconds = 0;
+    }
+}
 
 function update(time, cp_time) {
     // Don't use with
