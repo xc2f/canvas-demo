@@ -1,17 +1,22 @@
 ﻿//绘制正五角形
-var canvas = target('star');
-var context = canvas.getContext('2d');
-const MARGIN_LEFT = (canvas.width - Math.cos(18 * Math.PI / 180) * 2) / 2;
-//第一次
-drawStar(context, canvas.height / 2, MARGIN_LEFT, canvas.height / 2);
+var canvas_star = target('star');
+var context_star = canvas_star.getContext('2d');
+const MARGIN_LEFT_STAR = (canvas_star.width - Math.cos(18 * Math.PI / 180) * 2) / 2;
 
-//参数分别为：绘图上下文，图形尺寸（长角对应圆心的距离-大圆半径），横轴偏移，纵轴偏移，旋转（顺时针，可选），填充色（可选）。
-function drawStar(ctx, r, x, y, rot, f_color) {
+//设置五角形大小placeholder属性
+var ph_star_r = document.getElementById('star-r');
+ph_star_r.setAttribute('placeholder', ph_star_r.getAttribute('placeholder') + '，默认' + parseInt(canvas_star.height / 2), 10);
+
+//第一次
+drawStar(context_star, MARGIN_LEFT_STAR, canvas_star.height / 2, canvas_star.height / 2);
+
+//参数分别为：绘图上下文，横轴偏移，纵轴偏移，图形尺寸（长角对应圆心的距离-大圆半径），旋转（顺时针，可选），填充色（可选）。
+function drawStar(ctx, x, y, r, rot, f_color) {
     //设置默认值
     var rot = typeof rot !== 'undefined' ? rot : 0;
 
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas_star.width, canvas_star.height);
     ctx.save();
 
     //位移变换
@@ -47,29 +52,29 @@ function starPath(ctx) {
     ctx.closePath();
 }
 
-//获取canvas默认高度
-const C_HEIHT = canvas.height;
+//获取canvas_star默认高度
+const C_HEIGHT_STAR = canvas_star.height;
 
 document.getElementById('star-control').addEventListener('click', function () {
 
     var data = document.forms['star'];
-    var r = data.elements['star-r'].value;
-    var rot = data.elements['star-rot'].value;
-    var f_color = data.elements['star-f-color'].value;
+    var r = data.elements['star-r'].value || canvas_star.height / 2;
+    var rot = data.elements['star-rot'].value || 0;
+    var f_color = data.elements['star-f-color'].value || '#FEAA00';
     //防止出现输入一个大的实例后，第二次依然很大
-    //canvas.height=176，r由120变成100为什么会进入false
-    if (canvas.height < r * 2) {
-        canvas.height = r * 2;
+    //canvas_star.height=176，r由120变成100为什么会进入false
+    if (canvas_star.height < r * 2) {
+        canvas_star.height = r * 2;
     } else {
-        canvas.height = C_HEIHT;
+        canvas_star.height = C_HEIGHT_STAR;
     }
-    console.log(C_HEIHT, canvas.height);
-    var margin_l = (canvas.width - Math.cos(18 * Math.PI / 180) * 2) / 2;
-    drawStar(context, r, margin_l, canvas.height / 2, rot, f_color);
+    console.log(C_HEIGHT_STAR, canvas_star.height);
+    var margin_l = (canvas_star.width - Math.cos(18 * Math.PI / 180) * 2) / 2;
+    drawStar(context_star, margin_l, canvas_star.height / 2, r, rot, f_color);
 }, false);
 
 //reset
 document.getElementById('star-reset').addEventListener('click', function () {
-    canvas.height = C_HEIHT;
-    drawStar(context, C_HEIHT / 2, MARGIN_LEFT, C_HEIHT / 2);
+    canvas_star.height = C_HEIGHT_STAR;
+    drawStar(context_star, MARGIN_LEFT_STAR, C_HEIGHT_STAR / 2, C_HEIGHT_STAR / 2);
 }, false);

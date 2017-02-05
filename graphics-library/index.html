@@ -11,27 +11,27 @@
         <div class="row">
             <h2>正五角形</h2>
             <div class="star col-xs-12 col-md-6">
-                <canvas>正五角形</canvas>
-                <div class="fun"><code>drawStar(ctx, r, x, y [, rot, f_color])</code></div>
+                <canvas id="star">正五角形</canvas>
+                <div class="fun"><code>drawStar(ctx, x, y, r[, rot, f_color])</code></div>
             </div>
             <div class="star-control col-xs-12 col-md-6">
                 <form name="star" class="form-horizontal">
                     <div class="form-group">
                         <label for="star-r" class="col-xs-2 col-md-4 control-label">大小</label>
                         <div class="col-xs-10 col-md-8">
-                            <input type="text" class="form-control" id="star-r" name="star-r" placeholder="输入五角形长角到圆心长度" />
+                            <input type="number" class="form-control" id="star-r" name="star-r" placeholder="输入五角形长角顶点到中心点长度" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="star-rot" class="col-xs-2 col-md-4 control-label">旋转</label>
                         <div class="col-xs-10 col-md-8">
-                            <input type="text" class="form-control" id="star-rot" name="star-rot" placeholder="输入旋转参数" />
+                            <input type="number" class="form-control" id="star-rot" name="star-rot" placeholder="输入旋转角度，默认0" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="star-f-color" class="col-xs-3 col-md-4 control-label">填充颜色</label>
                         <div class="col-xs-9 col-md-8">
-                            <input type="color" id="star-f-color" name="star-f-color" placeholder="输入填充色，16进制、rgb、rgba" />
+                            <input type="color" id="star-f-color" name="star-f-color" placeholder="输入填充色名、16进制、rgb、rgba等" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -44,29 +44,65 @@
                     </div>
                 </form>
             </div>
+            <h2>弯月</h2>
+            <div class="moon col-xs-12 col-md-6">
+                <canvas id="moon">弯月</canvas>
+                <div class="fun"><code>drawMoon(ctx, x, y, r[, size, rot])</code></div>
+            </div>
+            <div class="moon-control col-xs-12 col-md-6">
+                <form name="moon" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="moon-r" class="col-xs-2 col-md-4 control-label">大小</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="number" class="form-control" id="moon-r" name="moon-r" placeholder="输入弯月半径" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="moon-s" class="col-xs-2 col-md-4 control-label">圆缺</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="number" min="0" max="10" class="form-control" id="moon-s" name="moon-s" placeholder="输入弯月圆缺系数(0, 10)，默认3" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="moon-rot" class="col-xs-2 col-md-4 control-label">旋转</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="number" id="moon-rot" class="form-control" name="moon-rot" placeholder="输入旋转角度，默认10" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-2 col-md-offset-4 col-md-4">
+                            <a type="button" class="btn btn-success" id="moon-control">Control</a>
+                        </div>
+                        <div class="col-xs-5 col-md-4 text-center">
+                            <a type="button" class="btn btn-warning" id="moon-reset">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script>
-        //add line below h1
+        //add line below h2
         var hr = document.createElement('hr');
         var h2 = document.getElementsByTagName('h2');
-        for (var i = 0; i < h2.length; i++) {
-            insertAfter(hr, h2[i]);
+        for (var i = 1; i < h2.length; i++) {
+            //为什么对第一个h2没有生效
+            //insertAfter(hr, h2[i]);
+            h2[i].parentElement.insertBefore(hr, h2[i]);
         }
-        function insertAfter(newEl, targetEl) {
-            var parentEl = targetEl.parentNode;
+        //function insertAfter(newEl, targetEl) {
+        //    var parentEl = targetEl.parentNode;
 
-            if (parentEl.lastChild == targetEl) {
-                parentEl.appendChild(newEl);
-            } else {
-                parentEl.insertBefore(newEl, targetEl.nextSibling);
-            }
-        }
+        //    if (parentEl.lastChild == targetEl) {
+        //        parentEl.appendChild(newEl);
+        //    } else {
+        //        parentEl.insertBefore(newEl, targetEl.nextSibling);
+        //    }
+        //}
 
         function target(className) {
-            const elem = document.getElementsByClassName(className)[0];
+            var elem = document.getElementsByClassName(className)[0];
             //col左右边距默认为30
             const WIDTH = elem.clientWidth - 30;
             const HEIGHT = elem.clientHeight;
@@ -78,5 +114,9 @@
         }
     </script>
     <script src="star.js"></script>
+    <script src="moon.js"></script>
+
+    <!--<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 </body>
 </html>

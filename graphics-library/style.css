@@ -15,6 +15,10 @@
     }
 }
 
+hr {
+    clear: both;
+}
+
 .star-control {
     margin-top: 20px;
 }
