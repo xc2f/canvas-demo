@@ -13,7 +13,7 @@ drawStar(context_star, MARGIN_LEFT_STAR, canvas_star.height / 2, canvas_star.hei
 //参数分别为：绘图上下文，横轴偏移，纵轴偏移，图形尺寸（长角对应圆心的距离-大圆半径），旋转（顺时针，可选），填充色（可选）。
 function drawStar(ctx, x, y, r, rot, f_color) {
     //设置默认值
-    var rot = typeof rot !== 'undefined' ? rot : 0;
+    rot = typeof rot !== 'undefined' ? rot : 0;
 
 
     ctx.clearRect(0, 0, canvas_star.width, canvas_star.height);

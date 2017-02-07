@@ -12,8 +12,8 @@ drawMoon(context_moon, MARGIN_LEFT_MOON, canvas_moon.height/2, canvas_moon.heigh
 
 // 传入的参数为绘图上下文，横轴偏移，纵轴偏移，半径大小，阴晴圆缺（可选），旋转角度（可选）
 function drawMoon(ctx, x, y, r, size, rot) {
-    var size = size || 3;
-    var rot = rot || 10;
+    size = size || 3;
+    rot = rot || 10;
 
     ctx.clearRect(0, 0, canvas_moon.width, canvas_moon.height);
     ctx.save();

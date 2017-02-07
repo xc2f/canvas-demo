@@ -19,6 +19,9 @@ hr {
     clear: both;
 }
 
+div[class*=control] {
+    margin-bottom: 20px;
+}
 .star-control {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
