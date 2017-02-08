@@ -132,7 +132,73 @@
                     </div>
                 </form>
             </div>
+            <h2>Clock</h2>
+            <div class="clock col-xs-12 col-md-6">
+                <canvas id="clock">clock</canvas>
+                <div class="fun"><code>drawMenu(ctx, x, y[, 0[, width[, height[, lw[, sc[, fc[, border]]]]]]])</code></div>
+            </div>
+            <div class="clock-control col-xs-12 col-md-6">
+                <form name="clock" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="clock-size" class="col-xs-2 col-md-4 control-label">表盘大小</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="number" class="form-control" id="clock-size" min="0" name="clock-size" placeholder="表盘大小" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clock-fc" class="col-xs-2 col-md-4 control-label">填充色</label>
+                        <div class="col-xs-10 col-md-2">
+                            <input type="color" id="clock-fc" name="clock-fc" value="#007ACC" />
+                        </div>
+                        <label for="clock-sc" class="col-xs-2 col-md-4 control-label">刻度色</label>
+                        <div class="col-xs-10 col-md-2">
+                            <input type="color" id="clock-sc" name="clock-sc" value="#ffffff" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clock-h-sc" class="col-xs-2 col-md-4 control-label">时针色</label>
+                        <div class="col-xs-10 col-md-8">
+                            <input type="color" id="clock-h-sc" name="clock-h-sc" value="#ffffff" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clock-m-sc" class="col-xs-3 col-md-4 control-label">分针色</label>
+                        <div class="col-xs-9 col-md-2">
+                            <input type="color" id="clock-m-sc" name="clock-m-sc" value="#ffffff" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clock-s-sc" class="col-xs-3 col-md-4 control-label">秒针色</label>
+                        <div class="col-xs-9 col-md-2">
+                            <input type="color" id="clock-s-sc" name="clock-s-sc" value="#ffffff" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clock-has-b" class="col-xs-3 col-md-4 control-label">边框</label>
+                        <div class="col-xs-9 col-md-2">
+                            <input type="checkbox" id="clock-has-b" name="clock-has-b" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clock-time" class="col-xs-3 col-md-4 control-label">设置时间</label>
+                        <div class="col-xs-9 col-md-2">
+                            <input type="time" id="clock-time" name="clock-time" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-2 col-md-offset-4 col-md-4">
+                            <a type="button" class="btn btn-success" id="clock-control">Control</a>
+                        </div>
+                        <div class="col-xs-5 col-md-4 text-center">
+                            <a type="button" class="btn btn-warning" id="clock-reset">Reset</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end row-->
         </div>
+        <!--end container-->
     </div>
 
     <script>
@@ -168,6 +234,7 @@
     <script src="star.js"></script>
     <script src="moon.js"></script>
     <script src="menu.js"></script>
+    <script src="clock.js"></script>
 
     <!--<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>-->
     <!--<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->

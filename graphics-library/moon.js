@@ -52,7 +52,7 @@ function pathMoon(ctx, size) {
 
     //运用两个直角三角形正切函数计算
     //arcTo半径参数不能为负
-    console.log(1 * dis(0, d, -1, 0) / Math.sqrt(Math.pow(d, 2)))
+    //console.log(1 * dis(0, d, -1, 0) / Math.sqrt(Math.pow(d, 2)))
     ctx.arcTo(d, 0, 0, -1, 1 * dis(0, d, -1, 0) / Math.sqrt(Math.pow(d, 2)));
 
     ctx.closePath();
@@ -83,5 +83,5 @@ document.getElementById('moon-control').addEventListener('click', function () {
 //reset
 document.getElementById('moon-reset').addEventListener('click', function () {
     canvas_moon.height = C_HEIGHT_MOON;
-    drawMoon(context_moon, MARGIN_LEFT_MOON, canvas_moon.height / 2, canvas_moon.height / 3);;
+    drawMoon(context_moon, MARGIN_LEFT_MOON, canvas_moon.height / 2, canvas_moon.height / 3);
 }, false);

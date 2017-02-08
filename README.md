@@ -12,6 +12,10 @@ Visit on [GitHub Pages](https://dachow.github.io/canvas-demo/)
 
   - 动态返回按钮。之前在别的网站看到用svg制作的动态按钮，用canvas实现了同样效果。 `画布中关键点的交互`
 
+  - 时钟 `数字平分`
+
 - [timer](https://Dachow.github.io/canvas-demo/timer/)
     
   > 参考自慕课网liuyubobobo老师的[课程](http://www.imooc.com/learn/133)。与教学demo不同在于改造为计时程序，并可打印分段计时时间。 `v-s关系`
+
+
