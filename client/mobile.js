@@ -129,7 +129,7 @@ function drawEdge(ctx, x, y, width, height, r, l_r, t_b, btn_w, btn_h) {
     ctx.stroke();
     try {
         //id为空会报错
-        ctx.addHitRegion({ "id": "toggleBtn" });
+        ctx.addHitRegion({ "id": "lightScreen" });
     } catch (e) {
         alert("请在chrome://flags中启用【实验性画布功能】或在firefox中输入about:config使canvas.hitregions.enabled值为true以开启更多功能~~~///(^v^)\\\~~~");
     }
@@ -282,13 +282,19 @@ function funNote(ctx, x, y, dire, text, t_c, s_c) {
 
     //解开屏幕说明
     if (first_show_light_screen) {
-        funNote(ctx, x + btn_w, y + height / 2 - t_b, 'top-right', '亮屏', '#fff', '#FEAF44');
+        funNote(ctx, x + btn_w + btn_w, y + height / 2 - t_b, 'top-right', '亮屏', '#fff', '#FEAF44');
         first_show_light_screen = false;
     }
 
     canvas.addEventListener('click', function (event) {
         //显示锁屏
-        if (event.region === 'toggleBtn') {
+        if (event.region === 'lightScreen') {
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawGrid(context, canvas.width / 2, canvas.height / 2, canvas.width, canvas.height, 10);
+            drawEdge(context, canvas.width / 2, canvas.height / 2, SCREEN_W, SCREEN_H, 27);
+            drawWWDX(context, canvas.width - 70, canvas.height - 100);
+
             //熄屏说明
             if (first_show_lock_screen) {
                 //height/5为绘制右侧按钮时传给sideBtn的参数，因为坐标原点不同，所以用canvas.height/2去减
