@@ -61,7 +61,7 @@ function drawEdge(ctx, x, y, width, height, r, l_r, t_b, btn_w, btn_h) {
     ctx.textAlign = 'center';
     //ctx.textBaseline = 'bottom';
     ctx.fillStyle = '#c0c0c0';
-    ctx.fillText('DACHOW', 0, -height / 2 + t_b - t_b * 1 / 5);
+    ctx.fillText('UMCAI', 0, -height / 2 + t_b - t_b * 1 / 5);
 
     //左侧两按钮
     sideBtn(ctx, -width, height, height / 3);
